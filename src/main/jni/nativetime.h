@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL
-Java_io_nano_nativetime_NativeTime_currentTimeMicros(JNIEnv *, jobject);
+Java_io_nano_time_jni_NativeTime_currentTimeMicros(JNIEnv *, jobject);
 
 /*
  * Class:     io_nano_nativetime_NativeTime
@@ -21,13 +21,13 @@ Java_io_nano_nativetime_NativeTime_currentTimeMicros(JNIEnv *, jobject);
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL
-Java_io_nano_nativetime_NativeTime_currentTimeNanos(JNIEnv *, jobject);
+Java_io_nano_time_jni_NativeTime_currentTimeNanos(JNIEnv *, jobject);
 
 JNIEXPORT jlong JNICALL
-JavaCritical_io_nano_nativetime_NativeTime_currentTimeMicros();
+JavaCritical_io_nano_time_jni_NativeTime_currentTimeMicros();
 
 JNIEXPORT jlong JNICALL
-JavaCritical_io_nano_nativetime_NativeTime_currentTimeNanos();
+JavaCritical_io_nano_time_jni_NativeTime_currentTimeNanos();
 
 #ifdef __cplusplus
 }

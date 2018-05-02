@@ -21,7 +21,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -34,8 +34,6 @@
                 <version>1.0-alpha-9</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <!--  trigger javah -->
-                    <!--<javahOS>win32</javahOS>-->
                     <compilerProvider>generic-classic</compilerProvider>
                     <compilerExecutable>gcc</compilerExecutable>
                     <compilerOutputDirectory>${project.build.directory}/lib</compilerOutputDirectory>
@@ -50,20 +48,15 @@
                             </fileNames>
                         </source>
                     </sources>
-
                     <compilerStartOptions>
                         <compilerStartOption>-fPIC</compilerStartOption>
                         <compilerStartOption>-I${jdk.home}/include</compilerStartOption>
                         <compilerStartOption>-I${jdk.home}/include/linux</compilerStartOption>
                     </compilerStartOptions>
-
                     <linkerStartOptions>
-                        <!--<linkerStartOption>-Wl</linkerStartOption>-->
                         <linkerStartOption>-shared</linkerStartOption>
                     </linkerStartOptions>
-
                 </configuration>
-
                 <executions>
                     <execution>
                         <id>native</id>
@@ -81,12 +74,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.21.0</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <propertyName>java.library.path</propertyName>
-                        <buildDirectory>target/lib</buildDirectory>
-                    </systemPropertyVariables>
+                    <argLine>-Djava.library.path=target/lib</argLine>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -115,7 +106,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.0</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
