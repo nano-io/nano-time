@@ -2,16 +2,20 @@
 ### Overview
 This library basically offers wall clock times in micro and nano second precision at the expense of an extra 5ns invocation cost.
 
-See here for more information on JavCritical:
+See here for more information on JavaCritical:
 https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652
+
+The native calls do not appear to benefit from JavaCritical optimizations.
+Ideally a completely different class should be created that offers no optimizations and the benchmarks can be compared directly.
+Next step should be to enable compiler logging to see if/how the JNI calls are optimized.
+
+Probably progression is to investigate:
+```-XX:+TieredCompilation -XX:+PrintCompilation```
 
 ### TODO
 - Banchmarks should be able to run from the command line using the uber jar benchmarks.jar. Currently not working.
 
 ### Benchmarks
-The native calls do not appear to benefit from JavaCritical optimizations.
-Ideally a completely different class should be created that offers no optimizations and the benchmarks can be compared directly.
-Next step should be to enable compiler logging to see if/how the JNI calls are optimized.
 
 ```
 Benchmark                                Mode  Cnt   Score   Error  Units
