@@ -3,18 +3,15 @@ package io.nano.time.jni;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Run with -XX:+TieredCompilation -XX:+PrintCompilation to see the compiler kick in
- */
-public class NativeTimeTest {
+public class NativeTimeNoCriticalTest {
 
-    private static final int RUN_COUNT = 20000;
+    private static final int RUN_COUNT = 10;
 
     @Test
     public void currentTimeMicros() {
         long lastTime = 0;
         for (int i = 0; i < RUN_COUNT; i++) {
-            long currentTimeMicros = NativeTime.currentTimeMicros();
+            long currentTimeMicros = NativeTimeNoCritical.currentTimeMicros();
             Assert.assertTrue(currentTimeMicros >= lastTime);
             lastTime = currentTimeMicros;
         }
@@ -24,7 +21,7 @@ public class NativeTimeTest {
     public void currentTimeNanos() {
         long lastTime = 0;
         for (int i = 0; i < RUN_COUNT; i++) {
-            long currentTimeNanos = NativeTime.currentTimeNanos();
+            long currentTimeNanos = NativeTimeNoCritical.currentTimeNanos();
             Assert.assertTrue(currentTimeNanos >= lastTime);
             lastTime = currentTimeNanos;
         }

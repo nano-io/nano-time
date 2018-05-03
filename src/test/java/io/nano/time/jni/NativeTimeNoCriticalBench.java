@@ -22,36 +22,25 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 5)
 @Measurement(iterations = 3)
 @Fork(3)
-public class NativeTimeBench {
+public class NativeTimeNoCriticalBench {
 
     public static void main(String[] args) throws RunnerException {
         System.setProperty("jmh.ignoreLock", "true");
         Options options = new OptionsBuilder()
-                .include(NativeTimeBench.class.getSimpleName())
                 .jvmArgsPrepend("-Djava.library.path=target/lib")
-                .jvmArgsAppend("-XX:+TieredCompilation -XX:+PrintCompilation")
+                .include(NativeTimeNoCriticalBench.class.getSimpleName())
                 .build();
         new Runner(options).run();
     }
 
     @Benchmark
-    public long currentTimeMillis() {
-        return System.currentTimeMillis();
-    }
-
-    @Benchmark
-    public long nanoTime() {
-        return System.nanoTime();
-    }
-
-    @Benchmark
     public long nativeCurrentTimeMicros() {
-        return NativeTime.currentTimeMicros();
+        return NativeTimeNoCritical.currentTimeMicros();
     }
 
     @Benchmark
     public long nativeCurrentTimeNanos() {
-        return NativeTime.currentTimeNanos();
+        return NativeTimeNoCritical.currentTimeNanos();
     }
 
 }

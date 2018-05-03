@@ -67,6 +67,26 @@
                             <goal>link</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>native-test</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>initialize</goal>
+                            <goal>compile</goal>
+                            <goal>link</goal>
+                        </goals>
+                        <configuration>
+                            <linkerFinalName>libnocritical</linkerFinalName>
+                            <sources>
+                                <source>
+                                    <directory>src/test/jni</directory>
+                                    <fileNames>
+                                        <fileName>nocritical.c</fileName>
+                                    </fileNames>
+                                </source>
+                            </sources>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -93,6 +113,7 @@
                             <classpathScope>test</classpathScope>
                             <executable>java</executable>
                             <arguments>
+                                <argument>-Djava.library.path=target/lib</argument>
                                 <argument>-classpath</argument>
                                 <classpath />
                                 <argument>org.openjdk.jmh.Main</argument>
