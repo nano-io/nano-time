@@ -23,12 +23,6 @@ Java_io_nano_time_jni_NativeTime_currentTimeMicros(JNIEnv *, jobject);
 JNIEXPORT jlong JNICALL
 Java_io_nano_time_jni_NativeTime_currentTimeNanos(JNIEnv *, jobject);
 
-JNIEXPORT jlong JNICALL
-JavaCritical_io_nano_time_jni_NativeTime_currentTimeMicros();
-
-JNIEXPORT jlong JNICALL
-JavaCritical_io_nano_time_jni_NativeTime_currentTimeNanos();
-
 #ifdef __cplusplus
 }
 #endif

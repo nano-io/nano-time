@@ -12,7 +12,7 @@
 #define NANOS_PER_MICRO     1000
 
 JNIEXPORT jlong JNICALL
-JavaCritical_io_nano_time_jni_NativeTime_currentTimeMicros() {
+Java_io_nano_time_jni_NativeTime_currentTimeMicros(JNIEnv *env, jobject thisObj) {
 #if defined(_POSIX_TIMERS)
   {
     struct timespec ts;
@@ -30,7 +30,7 @@ JavaCritical_io_nano_time_jni_NativeTime_currentTimeMicros() {
 }
 
 JNIEXPORT jlong JNICALL
-JavaCritical_io_nano_time_jni_NativeTime_currentTimeNanos() {
+Java_io_nano_time_jni_NativeTime_currentTimeNanos(JNIEnv *env, jobject thisObj) {
 #if defined(_POSIX_TIMERS)
   {
     struct timespec ts;
@@ -45,14 +45,4 @@ JavaCritical_io_nano_time_jni_NativeTime_currentTimeNanos() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
     return (((jlong) tv.tv_sec) * NANOS_PER_SECOND) + (((jlong) tv.tv_usec) * NANOS_PER_MICRO);
-}
-
-JNIEXPORT jlong JNICALL
-Java_io_nano_time_jni_NativeTime_currentTimeMicros(JNIEnv *env, jobject thisObj) {
-    return JavaCritical_io_nano_time_jni_NativeTime_currentTimeMicros();
-}
-
-JNIEXPORT jlong JNICALL
-Java_io_nano_time_jni_NativeTime_currentTimeNanos(JNIEnv *env, jobject thisObj) {
-    return JavaCritical_io_nano_time_jni_NativeTime_currentTimeNanos();
 }

@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class NativeTimeTest {
 
-    private static final int RUN_COUNT = 20000;
+    private static final int RUN_COUNT = 200_000;
 
     @Test
     public void currentTimeMicros() {

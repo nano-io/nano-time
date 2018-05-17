@@ -6,7 +6,7 @@ The native calls do not appear to benefit from JavaCritical optimizations.
 Next step should be to enable compiler logging to see if/how the JNI calls are optimized.
 
 ### TODO
-- Banchmarks should be able to run from the command line using the uber jar benchmarks.jar. Currently not working.
+- Benchmarks should be able to run from the command line using the uber jar benchmarks.jar. Currently not working.
 
 ### Benchmarks
 

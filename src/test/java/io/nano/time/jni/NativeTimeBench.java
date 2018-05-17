@@ -28,8 +28,7 @@ public class NativeTimeBench {
         System.setProperty("jmh.ignoreLock", "true");
         Options options = new OptionsBuilder()
                 .include(NativeTimeBench.class.getSimpleName())
-                .jvmArgsPrepend("-Djava.library.path=target/lib")
-                .jvmArgsAppend("-XX:+TieredCompilation -XX:+PrintCompilation")
+                .jvmArgsPrepend("-Djava.library.path=target/lib -XX:+CriticalJNINatives")
                 .build();
         new Runner(options).run();
     }
