@@ -3,17 +3,20 @@
 
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
-    <name>Native Time</name>
-    <groupId>io.nano.time</groupId>
-    <artifactId>native-time</artifactId>
+    <name>Nano Time</name>
+    <groupId>io.nano</groupId>
+    <artifactId>nano-time</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <junit.version>5.1.0</junit.version>
+        <assertj.version>3.10.0</assertj.version>
         <jmh.version>1.20</jmh.version>
         <jdk.home>/usr/lib/jvm/java-8-openjdk-amd64</jdk.home>
         <compiler.plugin.version>3.7.0</compiler.plugin.version>
+        <jar.plugin.version>3.1.0</jar.plugin.version>
         <surefire.plugin.version>2.21.0</surefire.plugin.version>
         <exec.plugin.version>1.6.0</exec.plugin.version>
         <shade.plugin.version>3.1.1</shade.plugin.version>
@@ -34,6 +37,14 @@
             </plugin>
 
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <argLine>-Djava.library.path=target/lib</argLine>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>native-maven-plugin</artifactId>
                 <version>${native.plugin.version}</version>
@@ -43,13 +54,13 @@
                     <compilerExecutable>gcc</compilerExecutable>
                     <compilerOutputDirectory>${project.build.directory}/lib</compilerOutputDirectory>
                     <linkerOutputDirectory>${project.build.directory}/lib</linkerOutputDirectory>
-                    <linkerFinalName>libnativetime</linkerFinalName>
+                    <linkerFinalName>libnanotime</linkerFinalName>
                     <linkerFinalNameExt>so</linkerFinalNameExt>
                     <sources>
                         <source>
                             <directory>src/main/jni</directory>
                             <fileNames>
-                                <fileName>nativetime.c</fileName>
+                                <fileName>nanotime.c</fileName>
                             </fileNames>
                         </source>
                     </sources>
@@ -76,10 +87,11 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.plugin.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${jar.plugin.version}</version>
                 <configuration>
-                    <argLine>-Djava.library.path=target/lib</argLine>
+                    <finalName>${artifactId}-${version}</finalName>
                 </configuration>
             </plugin>
 
@@ -87,48 +99,17 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>run-benchmarks</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <classpathScope>test</classpathScope>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>-Djava.library.path=target/lib</argument>
-                                <argument>-classpath</argument>
-                                <classpath />
-                                <argument>org.openjdk.jmh.Main</argument>
-                                <argument>.*</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${shade.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>benchmarks</finalName>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.openjdk.jmh.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <executable>java</executable>
+                    <classpathScope>test</classpathScope>
+                    <arguments>
+                        <argument>-Djava.library.path=target/lib</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>org.openjdk.jmh.Main</argument>
+                        <argument>.*</argument>
+                    </arguments>
+                </configuration>
             </plugin>
 
         </plugins>
@@ -136,21 +117,27 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
-            <version>1.8</version>
+            <scope>provided</scope>
+            <version>${jmh.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
-            <version>1.8</version>
+            <version>${jmh.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

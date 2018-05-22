@@ -1,4 +1,4 @@
-package io.nano.time.jni;
+package io.nano.time;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -22,12 +22,12 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 5)
 @Measurement(iterations = 3)
 @Fork(3)
-public class NativeTimeBench {
+public class NanoTimeBench {
 
     public static void main(String[] args) throws RunnerException {
         System.setProperty("jmh.ignoreLock", "true");
         Options options = new OptionsBuilder()
-                .include(NativeTimeBench.class.getSimpleName())
+                .include(NanoTimeBench.class.getSimpleName())
                 .jvmArgsPrepend("-Djava.library.path=target/lib -XX:+CriticalJNINatives")
                 .build();
         new Runner(options).run();
@@ -44,13 +44,13 @@ public class NativeTimeBench {
     }
 
     @Benchmark
-    public long nativeCurrentTimeMicros() {
-        return NativeTime.currentTimeMicros();
+    public long currentTimeMicros() {
+        return NanoTime.currentTimeMicros();
     }
 
     @Benchmark
-    public long nativeCurrentTimeNanos() {
-        return NativeTime.currentTimeNanos();
+    public long currentTimeNanos() {
+        return NanoTime.currentTimeNanos();
     }
 
 }

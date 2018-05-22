@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <jni.h>
-#include "nativetime.h"
+#include "nanotime.h"
 
 
 #define NANOS_PER_SECOND    1000000000
@@ -12,7 +12,7 @@
 #define NANOS_PER_MICRO     1000
 
 JNIEXPORT jlong JNICALL
-Java_io_nano_time_jni_NativeTime_currentTimeMicros(JNIEnv *env, jobject thisObj) {
+Java_io_nano_time_NanoTime_currentTimeMicros(JNIEnv *env, jobject thisObj) {
 #if defined(_POSIX_TIMERS)
   {
     struct timespec ts;
@@ -30,7 +30,7 @@ Java_io_nano_time_jni_NativeTime_currentTimeMicros(JNIEnv *env, jobject thisObj)
 }
 
 JNIEXPORT jlong JNICALL
-Java_io_nano_time_jni_NativeTime_currentTimeNanos(JNIEnv *env, jobject thisObj) {
+Java_io_nano_time_NanoTime_currentTimeNanos(JNIEnv *env, jobject thisObj) {
 #if defined(_POSIX_TIMERS)
   {
     struct timespec ts;
