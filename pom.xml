@@ -16,6 +16,7 @@
         <jmh.version>1.20</jmh.version>
         <jdk.home>/usr/lib/jvm/java-8-openjdk-amd64</jdk.home>
         <compiler.plugin.version>3.7.0</compiler.plugin.version>
+        <source.plugin.version>3.0.1</source.plugin.version>
         <jar.plugin.version>3.1.0</jar.plugin.version>
         <surefire.plugin.version>2.21.0</surefire.plugin.version>
         <exec.plugin.version>1.6.0</exec.plugin.version>
@@ -88,10 +89,24 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${source.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${jar.plugin.version}</version>
                 <configuration>
-                    <finalName>${artifactId}-${version}</finalName>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                 </configuration>
             </plugin>
 

@@ -49,3 +49,8 @@ https://gist.github.com/rednaxelafx/1165804#file_notes.md
 See here for more information on JavaCritical:
 https://stackoverflow.com/questions/36298111/is-it-possible-to-use-sun-misc-unsafe-to-call-c-functions-without-jni/36309652#36309652
 
+- Bundle the native libraries in the jar.
+    src/main/resources/lib/win-x86/<dlls for 32-bit windows>
+    src/main/resources/lib/linux-x86/<so for 32-bit linux>
+    src/main/resources/lib/linux-x86_64/<so for 64-bit linux>
+    src/main/resources/lib/linux-ia64/<so for 64-bit linux on itanium>
