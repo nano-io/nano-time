@@ -30,19 +30,22 @@ public final class NativeLoader {
     }
 
     private static void copyAndLoad(InputStream inputStream, Path target) {
-
-        // create the necessary parent directories
-        try {
-            Files.createDirectories(target.getParent());
-        } catch (IOException e) {
-            throw new IllegalArgumentException("Error creating directories " + target, e);
-        }
-
         String targetFile = target.normalize().toString();
-        try {
-            Files.copy(inputStream, target);
-        } catch (IOException e) {
-            throw new IllegalArgumentException("Error copying library to " + targetFile, e);
+
+        // check if file already exists
+        if (Files.notExists(target)) {
+            // create the necessary parent directories
+            try {
+                Files.createDirectories(target.getParent());
+            } catch (IOException e) {
+                throw new IllegalArgumentException("Error creating directories " + target, e);
+            }
+
+            try {
+                Files.copy(inputStream, target);
+            } catch (IOException e) {
+                throw new IllegalArgumentException("Error copying library to " + targetFile, e);
+            }
         }
 
         System.out.println("loading " + targetFile);
