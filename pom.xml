@@ -21,6 +21,7 @@
         <surefire.plugin.version>2.21.0</surefire.plugin.version>
         <exec.plugin.version>1.6.0</exec.plugin.version>
         <shade.plugin.version>3.1.1</shade.plugin.version>
+        <antrun.plugin.version>1.8</antrun.plugin.version>
         <native.plugin.version>1.0-alpha-9</native.plugin.version>
     </properties>
 
@@ -38,11 +39,9 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
-                <configuration>
-                    <argLine>-Djava.library.path=target/lib</argLine>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -53,7 +52,7 @@
                 <configuration>
                     <compilerProvider>generic-classic</compilerProvider>
                     <compilerExecutable>gcc</compilerExecutable>
-                    <compilerOutputDirectory>${project.build.directory}/lib</compilerOutputDirectory>
+                    <compilerOutputDirectory>${project.build.directory}/obj</compilerOutputDirectory>
                     <linkerOutputDirectory>${project.build.directory}/lib</linkerOutputDirectory>
                     <linkerFinalName>libnanotime</linkerFinalName>
                     <linkerFinalNameExt>so</linkerFinalNameExt>
@@ -96,6 +95,27 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${antrun.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-native-lib</id>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <target>
+                                <copy file="${project.build.directory}/lib/libnanotime.so"
+                                      tofile="${project.build.outputDirectory}/lib/libnanotime.so"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
