@@ -1,6 +1,7 @@
 before_script:
   - apt update && apt -y install gcc
 
+# Need this to cache maven dependencies
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
