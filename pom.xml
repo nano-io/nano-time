@@ -5,7 +5,7 @@
     <packaging>jar</packaging>
     <name>Nano Time</name>
     <groupId>io.nano</groupId>
-    <artifactId>nano-time</artifactId>
+    <artifactId> nano-time</artifactId>
     <version>1.0.1  </version>
 
     <properties>
@@ -181,7 +181,7 @@
         <repository>
             <id>bintray-nano-io-release</id>
             <name>nano-io-release</name>
-            <url>https://api.bintray.com/maven/nano-io/release/nano-time/;publish=1</url>
+            <url>https://api.bintray.com/maven/nano-io/release/${project.artifactId}/</url>
         </repository>
     </distributionManagement>
          
