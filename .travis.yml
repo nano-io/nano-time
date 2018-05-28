@@ -10,9 +10,8 @@ script:
 
 deploy:
   -
-    provider: bintray
-    key: $BINTRAY_API_KEY
-    user: nano-io
+    provider: script
+    script: "mvn -s .travis.settings.xml deploy"
     skip_cleanup: true
     on:
         tags: true
