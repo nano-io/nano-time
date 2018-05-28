@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nano-io/nano-time.svg?branch=master)](https://travis-ci.org/nano-io/nano-time)
 
 ### Overview
 Native JNI support for wall clock times in microsecond and nanosecond precision.
