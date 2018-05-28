@@ -7,10 +7,11 @@ cache:
     - "$HOME/.m2"
 script:
   - mvn --show-version install
+  - bash <(curl -s https://codecov.io/bash)  
 
 deploy:
     provider: script
     script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
     skip_cleanup: true
     on:
-        tags: true
+        tags: true[![Build Status](https://travis-ci.org/nano-io/nano-time.svg?branch=master)](https://travis-ci.org/nano-io/nano-time)
