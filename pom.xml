@@ -177,4 +177,12 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-nano-io-release</id>
+            <name>nano-io-release</name>
+            <url>https://api.bintray.com/maven/nano-io/release/nano-time/;publish=1</url>
+        </repository>
+    </distributionManagement>
+         
 </project>
