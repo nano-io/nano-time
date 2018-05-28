@@ -6,7 +6,7 @@ cache:
     directories:
     - "$HOME/.m2"
 script:
-  - mvn --show-version install
+  - mvn --show-version verify
 
 deploy:
   -
