@@ -32,10 +32,10 @@
                     <url>http://jcenter.bintray.com</url>
                 </pluginRepository>
             </pluginRepositories>
-            <id>bintray</id>
+            <id>bintray-nano-io-release</id>
         </profile>
     </profiles>
     <activeProfiles>
-        <activeProfile>bintray</activeProfile>
+        <activeProfile>bintray-nano-io-release</activeProfile>
     </activeProfiles>
 </settings>

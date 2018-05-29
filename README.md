@@ -13,8 +13,8 @@ mvn clean deploy
 
 The build process will generate the following files:
 
-> target/native-time.jar
-> target/lib/libnativetime.so
+> target/nano-time.jar
+> target/lib/libnanotime.so
 
 ### Benchmarks
 
