@@ -9,7 +9,7 @@ cache:
 deploy:
   -
     provider: script
-    script: "mvn -s .travis.settings.xml deploy:deploy"
+    script: "mvn -s .travis.settings.xml -DskipTests deploy"
     skip_cleanup: true
     on:
         tags: true
