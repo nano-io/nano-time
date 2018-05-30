@@ -2,35 +2,50 @@
 
 ### Overview
 Native JNI support for wall clock times in microsecond and nanosecond precision.
-This precision comes at the expense of an extra 5ns invocation cost over the build in methods offered by `System.currentTimeMillis()`.
+This precision comes at the expense of an extra 5ns invocation cost over the regular method `System.currentTimeMillis()`.
 
 ### Building the Project
 Run the following command to build the project:
 
 ```
-mvn clean deploy
+mvn clean install
 ```
 
-The build process will generate the following files:
+The build process will generate the following file:
 
-> target/nano-time.jar
+> target/nano-time-<version>.jar
 
-> target/lib/libnanotime.so
+### Using the Code
+
+Once built, you will need to add the maven dependency to your project.
+
+```
+<dependency>
+    <groupId>io.nano</groupId>
+    <artifactId>nano-time</artifactId>
+    <version>1.0.1</version>
+</dependency>
+```
+
+In your java code it is a simple matter of calling the static method.
+
+```
+long micros = NanoTime.currentTimeMicros();
+long nanos = NanoTime.currentTimeNanos()
+```
+The native library is loaded automatically from the jar.
 
 ### Benchmarks
 
 Since this is a very small project, it would be overkill to split the banchmarks out into a separate project.
 Due to this, benchmarks.jar is not created.
 
-You can run the benchmarks using th exec plugin:
+You can run the benchmarks using the exec plugin:
 
 ```
 mvn exec:exec
 ```
-
-
 These results were run on Ubuntu 16.04 LTS Intel Core i7-8550 @ 1.80GHz.
-
 
 ```
 Benchmark                                Mode  Cnt   Score   Error  Units
@@ -39,6 +54,9 @@ NanoTimeBench.nanoTime                 avgt   25  20.813 ± 0.935  ns/op
 NanoTimeBench.currentTimeMicros        avgt   25  25.900 ± 1.246  ns/op
 NanoTimeBench.currentTimeNanos         avgt   25  25.117 ± 1.479  ns/op
 ```
+
+### Supported Architectures
+The downloadable binaries currently only build on *Ubuntu* but there should be no reason not to build locally as long as gcc is installed.
 
 ### See Also
 
