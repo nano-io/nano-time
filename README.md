@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nano-io/nano-time.svg?branch=master)](https://travis-ci.org/nano-io/nano-time)  [ ![Download](https://api.bintray.com/packages/nano-io/release/nano-time/images/download.svg?version=1.0.1) ](https://bintray.com/nano-io/release/nano-time/1.0.1/link)
+[![Build Status](https://travis-ci.org/nano-io/nano-time.svg?branch=master)](https://travis-ci.org/nano-io/nano-time) &nbsp;   [![Download](https://api.bintray.com/packages/nano-io/release/nano-time/images/download.svg?version=1.0.1) ](https://bintray.com/nano-io/release/nano-time/1.0.1/link)
 
 ### Overview
 Native JNI support for wall clock times in microsecond and nanosecond precision.
